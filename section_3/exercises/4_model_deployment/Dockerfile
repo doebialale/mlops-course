@@ -13,7 +13,7 @@ RUN python -c "import wandb; print(wandb.__version__)" || echo "Failed to import
 
 COPY . .
 
-ENV WANDB_API_KEY=your-api-key-goes-here
-ENV WANDB_PROJECT=your-project-name-goes-here
+ENV WANDB_API_KEY=YOUR-WANDB-API-KEY
+ENV WANDB_PROJECT=YOUR-PROJECT-NAME
 
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]

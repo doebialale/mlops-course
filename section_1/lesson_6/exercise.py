@@ -19,18 +19,14 @@ y = iris.target
 
 # Step 3: Log the original dataset to WandB
 # TODO: Log the original dataset as an artifact to WandB.
-artifact = wandb.Artifact("iris_dataset_original", type="dataset")
-artifact.add(wandb.Table(data=X_original, columns=iris.feature_names), name="data")
-wandb.log_artifact(artifact)
+
 
 # Step 4: Preprocess the dataset (Cleaned Version)
 scaler = StandardScaler()
 X_cleaned = scaler.fit_transform(X_original)
 
 # TODO: Log the cleaned dataset as a new versioned artifact to WandB.
-artifact = wandb.Artifact("iris_dataset_cleaned", type="dataset")
-artifact.add(wandb.Table(data=X_cleaned, columns=iris.feature_names), name="data")
-wandb.log_artifact(artifact)
+
 
 
 # Step 5: Feature Engineering (Feature-Engineered Version)
@@ -38,9 +34,7 @@ X_feature_engineered = np.c_[X_cleaned, X_cleaned[:, 0] * X_cleaned[:, 1]]
 feature_names = iris.feature_names + ["feature_0_1_product"]
 
 # TODO: Log the feature-engineered dataset as another versioned artifact to WandB.
-artifact = wandb.Artifact("iris_dataset_feature_engineered", type="dataset")
-artifact.add(wandb.Table(data=X_feature_engineered, columns=feature_names), name="data")
-wandb.log_artifact(artifact)
+
 
 # Step 6: Train and Version Multiple Models
 
@@ -64,9 +58,7 @@ model_filename_orig = "rf_model_original.pkl"
 joblib.dump(model_original, model_filename_orig)
 
 # TODO: Log the original model as an artifact to WandB.
-artifact = wandb.Artifact("rf_model_original.pkl", type="model")
-artifact.add_file(model_filename_orig)
-wandb.log_artifact(artifact)
+
 
 # Train and log model on cleaned dataset
 X_train_cleaned, X_test_cleaned, _, _ = train_test_split(X_cleaned, y, test_size=0.2, random_state=42)
@@ -80,9 +72,7 @@ model_filename_cleaned = "rf_model_cleaned.pkl"
 joblib.dump(model_cleaned, model_filename_cleaned)
 
 # TODO: Log the cleaned model as an artifact to WandB.
-artifact = wandb.Artifact("rf_model_cleaned.pkl", type="model")
-artifact.add_file(model_filename_cleaned)
-wandb.log_artifact(artifact)
+
 
 
 # Homework: Do the same for the feature-engineered dataset and compare the findings.

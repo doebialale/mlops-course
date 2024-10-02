@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import xgboost as xgb
 
 # Initialize WandB for tracking the model training process
-wandb.init(project="credit-card-fraud-detection", name="model-training")
+wandb.init(project="credit-card-fraud-detection-test-515", name="model-training")
 
 def load_data():
     """
@@ -17,7 +17,7 @@ def load_data():
     
     :return: pandas DataFrame, feature matrix and target vector
     """
-    artifact = wandb.use_artifact('anicin/credit-card-fraud-detection-test-2/engineered_data.csv:latest', type='dataset')
+    artifact = wandb.use_artifact('anicin/credit-card-fraud-detection-test-515/engineered_data.csv:latest', type='dataset')
     artifact_dir = artifact.download()
 
     # Load the dataset
@@ -45,16 +45,13 @@ def train_model(X_train, y_train, X_test, y_test):
     # TODO: Make predictions on the test set
     
     # TODO:  Calculate evaluation metrics (accuracy, precision, recall, f1_score) and store them in the metrics dictionary
-    metrics = {
-
-    }
 
     # Log metrics to WandB
     wandb.log(metrics)
 
     # TODO: Infer and return signature for the model deployment
 
-    return model, metrics
+    return model, metrics, signature
 
 def main():
     mlflow.start_run()
@@ -67,11 +64,11 @@ def main():
 
     # Train the model and evaluate its performance
     model, metrics, signature = train_model(X_train, y_train, X_test, y_test)
-    
+
     # TODO: Log parameters and metrics to MLFlow
-    mlflow.log_param("model_type", "XGBoost")
-    # NOTE (HINT): To get metrics you can use metrics.items() -> returns dictionary
     
+    # NOTE (HINT): To get metrics you can use metrics.items() -> returns dictionary
+
     # TODO: Save the model to a file
     
     # TODO: Log the model to WandB and MLFlow

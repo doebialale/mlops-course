@@ -22,7 +22,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # TODO: Step 4: Train the model and log it with MLFlow
 
-with mlflow.start_run(run_name="RF_Model_Iris_dataset"):
+with NotImplementedError:
     # Train the model
     model = RandomForestClassifier(n_estimators=100, max_depth=3, random_state=42)
     model.fit(X_train, y_train)
@@ -32,20 +32,13 @@ with mlflow.start_run(run_name="RF_Model_Iris_dataset"):
     accuracy = accuracy_score(y_test, predictions)
     
     # TODO: Log the accuracy with MLFlow
-    mlflow.log_metric("accuracy", accuracy)
 
     # TODO: Log the model with MLFlow
-    mlflow.sklearn.log_model(model, "random_forest_model", input_example=X_train[:1])
 
     # TODO: Save the model with joblib and log it as an artifact with MLFlow
-    joblib.dump(model, "random_forest_model.pkl")
-    mlflow.log_artifact("random_forest_model.pkl")
+
 
     # TODO: Log model parameters for reproducibility
-    mlflow.log_param("n_estimators", 100)
-    mlflow.log_param("max_depth", 3)
-    mlflow.log_param("random_state", 42)
 
 # Step 5: Finish WandB and MLFlow runs
 # TODO: Ensure both MLFlow and WandB runs are properly closed.
-mlflow.end_run()

@@ -40,15 +40,8 @@ model.fit(X_train, y_train)
 # TODO: Predict on the test data and calculate accuracy, precision, and recall.
 # HINT: Use `model.predict()` to make predictions and `accuracy_score()`, `precision_score()`, and `recall_score()` to calculate metrics.
 
-y_pred = model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-precision = precision_score(y_test, y_pred, average='macro')
-recall = recall_score(y_test, y_pred, average='macro')
-
 # TODO: Log the accuracy, precision, and recall to WandB using `wandb.log()`
 
-
-wandb.log({"accuracy": accuracy, "precision": precision, "recall": recall})
 
 # Step 6: End the WandB run
 wandb.finish() 

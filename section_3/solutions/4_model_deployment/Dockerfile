@@ -13,7 +13,7 @@ RUN python -c "import wandb; print(wandb.__version__)" || echo "Failed to import
 
 COPY . .
 
-ENV WANDB_API_KEY=962eeef8ee5a40ca0fee272245338b7926a03c5c
-ENV WANDB_PROJECT=credit-card-fraud-detection-test-515
+ENV WANDB_API_KEY=YOUR-WANDB-API-KEY
+ENV WANDB_PROJECT=YOUR-PROJECT-NAME
 
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]

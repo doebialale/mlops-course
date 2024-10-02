@@ -1,7 +1,1 @@
-name: my_component
-
-conda_env: conda.yml
-
-entry_points:
-  main:
-    command: "python my_component.py"
+# To implemented MLproeject file

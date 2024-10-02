@@ -57,13 +57,13 @@ def evaluate_model(X, y):
         raise
 
     #TODO: Implement the evaluation of the model using cross-validation and multiple metrics
-    
+
     # Calculate the metrics using cross_val_score
     metrics = {}
     for metric in ['accuracy', 'precision', 'recall', 'f1', 'roc_auc']:
         try:
             # TODO: Calculate the metrics using cross_val_score
-            score = False
+
             metrics[f"cv_{metric}"] = score
         except Exception as e:
             print(f"Error calculating {metric}: {e}")

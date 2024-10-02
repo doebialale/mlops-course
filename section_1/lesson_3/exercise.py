@@ -4,8 +4,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
 #TODO: Import the WandB library
-import wandb
-wandb.init(project="first-project-mlops-course")
 
 # Load the Iris dataset
 iris = load_iris()
@@ -25,8 +23,6 @@ accuracy = accuracy_score(y_test, y_pred)
 print(f"Model accuracy: {accuracy}")
 
 # TODO: Log the accuracy to WandB
-
-wandb.log({"accuracy": accuracy})
 
 wandb.finish()
 

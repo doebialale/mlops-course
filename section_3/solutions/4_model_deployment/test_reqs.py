@@ -1,9 +1,9 @@
 import requests
 import numpy as np
 import time
-import random
+import random 
 
-BASE_URL = "http://192.168.68.110:8080"
+BASE_URL = "https://ml-model-deploy-97899782461.us-central1.run.app"
 
 def test_health_check():
     response = requests.get(f"{BASE_URL}/health")

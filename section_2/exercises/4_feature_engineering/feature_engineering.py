@@ -64,43 +64,29 @@ def feature_engineering(data):
     data['trans_date_trans_time'] = pd.to_datetime(data['trans_date_trans_time'], errors='coerce')
 
     #TODO: Example Feature Engineering: Creating new features
-    data['hour'] = data['trans_date_trans_time'].dt.hour
-    data['day_of_week'] = data['trans_date_trans_time'].dt.dayofweek
 
     # TODO: Log new feature creation
-    wandb.log({"new_features": ['hour', 'day_of_week']})
 
     # Example: One-Hot Encoding categorical variables
     categorical_features = ['category', 'state']
     numeric_features = ['amt', 'hour', 'day_of_week']
 
     # TODO: Create a pipeline for transformations
-    existing_num_features = [col for col in numeric_features if col in data.columns]
-    
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ('num', StandardScaler(), existing_num_features),
-        ])
+
+    preprocesor = None
     
     pipeline = Pipeline(steps=[('preprocessor', preprocessor)])
 
     # Apply transformations
     transformed_data = pipeline.fit_transform(data)
-    
     feature_names = existing_num_features
-
     transformed_df = pd.DataFrame(transformed_data, columns=feature_names)
-
     transformed_df['is_fraud'] = data['is_fraud']
 
     # TODO: Log the transformed data
-    wandb.log({"transformed_data": wandb.Table(dataframe=transformed_df)})
 
     # TODO: Log pipeline
-    joblib.dump(pipeline, 'pipeline.pkl')
-    artifact = wandb.Artifact('pipeline', type='model')
-    artifact.add_file('pipeline.pkl')
-    wandb.log_artifact(artifact)
+
 
     # Log transformed feature details
     wandb.log({"transformed_features": feature_names})

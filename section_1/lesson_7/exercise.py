@@ -37,7 +37,6 @@ sweep_config = {
 }
 
 # TODO: Initialize the sweep
-sweep_id = wandb.sweep(sweep_config, project="first-project-mlops-course")
 
 # Function to run the sweep
 def train():
@@ -60,7 +59,6 @@ def train():
     wandb.log({"accuracy": accuracy_sweep})
 
 # TODO: Execute the sweep
-wandb.agent(sweep_id, train)
 
 # Step 8: Finish the WandB run
 wandb.finish()

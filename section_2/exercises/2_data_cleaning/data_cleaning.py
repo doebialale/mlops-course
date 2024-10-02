@@ -58,10 +58,6 @@ def clean_data(data):
     imputed_data = pd.DataFrame(imputer.fit_transform(numeric_data), columns=numeric_data.columns)
 
     # TODO: Save imputer
-    joblib.dump(imputer, 'imputer.pkl')
-    artifact = wandb.Artifact(name='imputer', type='model')
-    artifact.add_file('imputer.pkl')
-    wandb.log_artifact(artifact)
 
     # Step 2: Handle Outliers
     outlier_threshold = 1.5
@@ -80,20 +76,15 @@ def clean_data(data):
     outliers_removed = imputed_data.shape[0] - imputed_data.shape[0]
     
     # TODO: Log outlier removal stats
-    wandb.log({"outliers_removed": outliers_removed})
 
     # Step 3: Feature Scaling
     scaler = StandardScaler()
     scaled_data = pd.DataFrame(scaler.fit_transform(imputed_data), columns=imputed_data.columns)
 
     # TODO: Log the feature scaling stats
-    wandb.log({"feature_scaling_stats": scaler.get_params()})
 
     # TODO: Save scaler
-    joblib.dump(scaler, 'scaler.pkl')
-    artifact = wandb.Artifact(name='scaler', type='model')
-    artifact.add_file('scaler.pkl')
-    wandb.log_artifact(artifact)
+)
 
     # Add trans_date_trans_time column back to the data 
     scaled_data = pd.concat([scaled_data, data['trans_date_trans_time']], axis=1) 

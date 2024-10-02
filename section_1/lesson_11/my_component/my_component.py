@@ -12,7 +12,6 @@ import joblib
 
 def main():
     # TODO: Initialize WandB
-    wandb.init(project="mlops-integration-mlflow", name="lesson-11")
 
     # Load dataset
     iris = load_iris()
@@ -30,7 +29,6 @@ def main():
     }
     mlflow.log_params(hyperparameters)
     # TODO: Log the hyperparameters to WandB
-    wandb.config.update(hyperparameters)
 
     # Train a model
     model = RandomForestClassifier(**hyperparameters)
@@ -44,7 +42,6 @@ def main():
     mlflow.log_metric("accuracy", accuracy)
 
     # TODO: Log the accuracy to WandB
-    wandb.log({"accuracy": accuracy})
 
     # Log the model to MLFlow
     mlflow.sklearn.log_model(model, "random_forest_model")
@@ -55,10 +52,7 @@ def main():
     mlflow.log_artifact(model_filename)
 
     # TODO: Save and log the model as an artifact for additional use
-    model_artifact = wandb.Artifact("rf_model_integration", type="model")
-    model_artifact.add_file(model_filename)
-    wandb.log_artifact(model_artifact)
-    
+
     wandb.finish()
 
 if __name__ == "__main__":

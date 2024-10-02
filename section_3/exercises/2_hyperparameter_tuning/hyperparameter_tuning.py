@@ -47,16 +47,12 @@ def train_model(config=None):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     #TODO: Initialize and train the XGBoost model with the provided hyperparameters
-    
+
     # TODO: Fit the model
 
     y_pred = model.predict(X_test)
     
     # TODO Calculate evaluation metrics
-    accuracy = False    
-    precision = False
-    recall = False
-    f1_score_value = False
 
     metrics = {
         "accuracy": accuracy,
@@ -84,14 +80,13 @@ def main(run_type="FAST_RUN"):
         print("Running full hyperparameter tuning...")
 
     # TODO: Run the WandB Sweep for hyperparameter tuning
-    sweep_id = wandb.sweep(sweep_config, project="credit-card-fraud-detection-test-515")
     
     # Custom run function to limit the number of runs
     def run_sweep():
         run_count = 0
         while run_count < max_runs if max_runs is not None else True:
             # TODO: Run the wandb.agent with the train_model function
-
+            wandb.agent(sweep_id, train_model, count=1)
             run_count += 1
             if max_runs is not None:
                 print(f"Completed {run_count}/{max_runs} runs")
@@ -100,13 +95,14 @@ def main(run_type="FAST_RUN"):
 
     #TODO: Get the best run from the sweep
     # NOTE (HINT): Use the wandb.Api() to get the best run
-    
-    
+
+    best_run = None
+
     print(f"Best run: {best_run}")
 
     best_config = best_run.config
     # TODO: Define and train the model with the best hyperparameters
-    best_model = False
+
 
     X, y = load_data()
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -118,6 +114,10 @@ def main(run_type="FAST_RUN"):
 
     # TODO: Try to load the baseline model from MLflow Models
     baseline_model = None
+
+    for mv in client.search_model_versions(f"name='{model_name}'"):
+        baseline_model = mlflow.xgboost.load_model(mv.source)
+        break
 
     if baseline_model is not None:
         # Evaluate the baseline model
@@ -139,9 +139,8 @@ def main(run_type="FAST_RUN"):
         production_f1_score = best_f1_score
 
     # TODO: Create model signature
-    signature = None
+
     # TODO: Register the production model in MLflow
-    model_name = "prod_model"
 
     # Log the F1 score as a metric in MLflow
     mlflow.log_metric("production_f1_score", production_f1_score)

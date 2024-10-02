@@ -35,8 +35,7 @@ def validate_data(data):
     schema = DataFrameSchema({ 
         "trans_date_trans_time": Column(pa.DateTime, nullable=False),
         "amt": Column(float, nullable=True), 
-        "lat": Column(float, nullable=True),
-        "long": Column(float, nullable=True),
+        # TODO: Add the rest of the columns
     }) 
  
     try: 
