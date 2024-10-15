@@ -74,7 +74,7 @@ def load_artifacts():
         model = joblib.load(model_path)
         print("Model loaded successfully")
         
-        artifact = run.use_artifact('pipeline:latest', type='model')
+        artifact = run.use_artifact('preprocessor:latest', type='model')
         pipeline_path = artifact.download()
         pipeline = joblib.load(f"{pipeline_path}/pipeline.pkl")
         print("Pipeline loaded successfully")
