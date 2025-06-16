@@ -57,3 +57,4 @@ mlflow.db
 *.png
 /balanced_dataset.csv
 /EDA.ipynb
+/datasets
