@@ -1,4 +1,0 @@
-[core]
-    remote = myremote
-['remote "myremote"']
-    url = https://us-east-1.console.aws.amazon.com/s3/buckets/ab-ml-demo/datasets
