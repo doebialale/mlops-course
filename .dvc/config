@@ -1,0 +1,5 @@
+[core]
+    remote = myremote
+    autostage = true
+['remote "myremote"']
+    url = https://us-east-1.console.aws.amazon.com/s3/buckets/ab-ml-demo/datasets
