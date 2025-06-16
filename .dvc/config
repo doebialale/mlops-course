@@ -1,0 +1,5 @@
+[core]
+    remote = ab-ml-demo
+    autostage = true
+['remote "ab-ml-demo"']
+    url = https://us-east-1.console.aws.amazon.com/s3/buckets/ab-ml-demo
